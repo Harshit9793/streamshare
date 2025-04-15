@@ -5,7 +5,8 @@ import {
     signInWithPopup, 
     GoogleAuthProvider,
     signInWithPhoneNumber,
-    RecaptchaVerifier
+    RecaptchaVerifier,
+    onAuthStateChanged
 } from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js';
 
 // Initialize Firebase with your config
@@ -81,11 +82,70 @@ async function signOut() {
     }
 }
 
+// Check Auth State
+function checkAuthState() {
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // User is signed in
+            console.log('User is signed in:', user);
+            // Update UI for signed-in state
+            updateUIForSignedInUser(user);
+        } else {
+            // User is signed out
+            console.log('User is signed out');
+            // Update UI for signed-out state
+            updateUIForSignedOutUser();
+        }
+    });
+}
+
+// Update UI for signed-in user
+function updateUIForSignedInUser(user) {
+    // Hide sign-in container if it exists
+    const signInContainer = document.querySelector('.auth-container');
+    if (signInContainer) {
+        signInContainer.style.display = 'none';
+    }
+
+    // Show user profile if the element exists
+    const userProfile = document.getElementById('user-profile');
+    if (userProfile) {
+        userProfile.style.display = 'block';
+        // Update profile information
+        document.getElementById('user-name').textContent = user.displayName || 'User';
+        document.getElementById('user-email').textContent = user.email || 'No email';
+        document.getElementById('user-phone').textContent = user.phoneNumber || 'No phone number';
+        
+        // Set profile picture if available
+        const profilePic = document.getElementById('user-photo');
+        if (profilePic && user.photoURL) {
+            profilePic.src = user.photoURL;
+            profilePic.style.display = 'block';
+        }
+    }
+}
+
+// Update UI for signed-out user
+function updateUIForSignedOutUser() {
+    // Show sign-in container if it exists
+    const signInContainer = document.querySelector('.auth-container');
+    if (signInContainer) {
+        signInContainer.style.display = 'block';
+    }
+
+    // Hide user profile if the element exists
+    const userProfile = document.getElementById('user-profile');
+    if (userProfile) {
+        userProfile.style.display = 'none';
+    }
+}
+
 // Export functions
 window.auth = {
     signInWithGoogle,
     startPhoneSignIn,
     verifyPhoneCode,
     signOut,
-    initRecaptcha
+    initRecaptcha,
+    checkAuthState
 }; 

@@ -10,6 +10,21 @@
   <body>
     <div class="container">
       <h1>Welcome to VideoStream</h1>
+      
+      <!-- User Profile Section (Hidden by default) -->
+      <div id="user-profile" class="user-profile" style="display: none;">
+        <div class="profile-header">
+          <img id="user-photo" class="profile-photo" style="display: none;" alt="Profile Photo">
+          <h2 id="user-name">User</h2>
+        </div>
+        <div class="profile-info">
+          <p><strong>Email:</strong> <span id="user-email">No email</span></p>
+          <p><strong>Phone:</strong> <span id="user-phone">No phone number</span></p>
+        </div>
+        <button id="sign-out-button" class="auth-button">Sign Out</button>
+      </div>
+
+      <!-- Sign In Section -->
       <div class="auth-container">
         <button id="google-sign-in" class="auth-button">
           <img src="https://www.google.com/favicon.ico" alt="Google" width="20" height="20">
@@ -43,6 +58,9 @@
         // Initialize reCAPTCHA
         window.auth.initRecaptcha();
 
+        // Check auth state
+        window.auth.checkAuthState();
+
         // Google Sign In
         document.getElementById('google-sign-in').addEventListener('click', () => {
           window.auth.signInWithGoogle();
@@ -58,6 +76,11 @@
         document.getElementById('verify-code-button').addEventListener('click', () => {
           const code = document.getElementById('verification-code').value;
           window.auth.verifyPhoneCode(code);
+        });
+
+        // Sign Out
+        document.getElementById('sign-out-button').addEventListener('click', () => {
+          window.auth.signOut();
         });
       });
     </script>
