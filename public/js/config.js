@@ -1,12 +1,11 @@
 // Firebase configuration
 const firebaseConfig = {
-    apiKey: "YOUR_FIREBASE_API_KEY",
-    authDomain: "YOUR_FIREBASE_AUTH_DOMAIN",
-    databaseURL: "YOUR_FIREBASE_DATABASE_URL",
-    projectId: "YOUR_FIREBASE_PROJECT_ID",
-    storageBucket: "YOUR_FIREBASE_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_FIREBASE_MESSAGING_SENDER_ID",
-    appId: "YOUR_FIREBASE_APP_ID"
+    apiKey: "AIzaSyD3Y_M0n92NLVlAMz_lGSZPhyVgeyn8ADc",
+    projectId: "streamshare-fg833",
+    storageBucket: "streamshare-fg833.firebasestorage.app",
+    appId: "1:516059473618:web:9c438626102ce03f0def0b",
+    authDomain: "streamshare-fg833.firebaseapp.com",
+    messagingSenderId: "516059473618"
 };
 
 // AWS S3 configuration
